@@ -7,28 +7,67 @@ import KakaoCallback from './page/callback/KakaoCallback';
 import Layout from './_common/Layout';
 import Category from './page/category/category';
 import PlaceList from './page/placelist/PlaceList';
+import PlaceDetails from './page/placedetails/PlaceDetails';
+
+interface PrivateRouteProps {
+    children: React.ReactElement;
+}
+
+// PrivateRoute 컴포넌트 정의
+const PrivateRoute = ({ children }: PrivateRouteProps) => {
+    const [isLoading, setIsLoading] = useState(true);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        setIsAuthenticated(!!token);
+        setIsLoading(false);
+    }, []);
+
+    if (isLoading) {
+        return <div>Loading...</div>; // 로딩 중 화면
+    }
+
+    return isAuthenticated ? children : <Navigate to="/login" replace />;
+};
+
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-    // JWT 기반 로그인 상태 확인
     useEffect(() => {
         const token = localStorage.getItem('token');
-        setIsLoggedIn(!!token); // JWT가 있으면 로그인 상태로 설정
-    }, []); // 빈 배열로 설정하여 마운트 시 한 번만 실행
+        setIsLoggedIn(!!token);
+    }, []);
+
+    // 루트 경로 접속 시 로그인 상태에 따라 리다이렉트
+    const RootRedirect = () => {
+        const token = localStorage.getItem('token');
+        return token ? <Navigate to="/login" replace /> : <Navigate to="/main" replace />;
+    };
+    
 
     return (
         <Router>
             <Routes>
-                {/* 로그인 여부에 따라 화면 변경 */}
+                {/* 루트 경로에 대한 리다이렉트 처리 */}
+                <Route path="/" element={<RootRedirect />} />
                 
+                <Route path="/login" element={<LoginForm setIsLoggedIn={setIsLoggedIn} />} />
                 <Route path="/signup" element={<SignUpForm setIsLoggedIn={setIsLoggedIn}/>} />
-                {/* 보호된 라우트: 로그인하지 않은 사용자는 로그인 화면으로 리다이렉트 */}
                 <Route path="/callback/KakaoCallback" element={<KakaoCallback setIsLoggedIn={setIsLoggedIn} />} />
-                <Route path="/" element={<Layout />}>
-                    <Route path="/" element={<MainPage />} />
-                    <Route path='/category' element={ <Category/>} />
-                    <Route path='/placelist' element={<PlaceList/>}/>
+                
+                <Route path="/main" element={
+                    <PrivateRoute>
+                        <Layout />
+                    </PrivateRoute>
+                }>
+                    <Route path="" element={<MainPage />}>
+                        <Route path="details/:id" element={<PlaceDetails/>}/>
+                    </Route>
+                    <Route path='category' element={<Category/>} />
+                    <Route path='placelist' element={<PlaceList/>}/>
+                    <Route path='placedetails/:id' element={<PlaceDetails/>}/>
                 </Route>
             </Routes>
         </Router>

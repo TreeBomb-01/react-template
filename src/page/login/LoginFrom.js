@@ -7,7 +7,7 @@ function LoginForm(setIsLoggedIn) {
 
     const handleSocialLogin = async (provider) => {
         try {
-            const response = await axios.get(`http://localhost:8090/${provider}/login`);
+            const response = await axios.get(`http://localhost:8081/${provider}/login`);
             const LoginUrl = response.data; // URL 문자열
             window.location.href = LoginUrl;
             const { token } = await response.json();

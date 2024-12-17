@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Outlet } from 'react-router-dom';
 import './MainForm.css'; // CSS 파일 연결
 
 function MainPage() {
@@ -88,6 +88,8 @@ function MainPage() {
                     </div>
                 </div>
             ))}
+            
+            <Outlet />
         </div>
     );
     

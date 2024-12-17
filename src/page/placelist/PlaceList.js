@@ -15,7 +15,7 @@ const PlaceList = () => {
     useEffect(() => {
         const fetchPlaces = async () => {
             try {
-                const response = await fetch('http://192.168.219.103:8090/api/get_datespot'); // 서버 API 호출
+                const response = await fetch('https://treebomb.mooo.com/api/get_datespot'); // 서버 API 호출
                 const result = await response.json(); // JSON 데이터 파싱
                 setPlaces(result); // 데이터를 상태에 저장
                 setFilteredPlaces(result);
@@ -65,7 +65,7 @@ const PlaceList = () => {
     };
 
     const handleCardClick = (id) => {
-        navigate(`/details/${id}`);
+        navigate(`/placedetails/${id}`);
     };
 
     return (

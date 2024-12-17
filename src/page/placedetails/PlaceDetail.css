@@ -1,21 +1,48 @@
-/* 전체 컨테이너 스타일 */
+/* 배경 오버레이 */
 .place-details-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* 반투명 배경 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
     padding: 20px;
-    font-family: Arial, sans-serif;
+    pointer-events: auto;
+}
+
+/* 팝업 내용 */
+.place-details-content {
+    background-color: white;
+    width: 100%;
+    max-width: 440px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 30px;
+    padding: 25px;
     position: relative;
-    max-width: 440px; /* 페이지 중앙에 고정 */
-    margin: 0 auto;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease-out;
+    pointer-events: auto;
 }
 
 /* 헤더 스타일 */
 .place-details-header {
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
+    padding: 15px 0;
+    border-bottom: 2px solid #ffd6e6;
 }
 
 .place-details-header h1 {
-    font-size: 24px;
+    font-size: 28px;
     color: #ff7fa7;
+    margin: 0;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* 기본 정보 섹션 */
@@ -25,35 +52,409 @@
 
 .place-details-image {
     width: 100%;
-    max-width: 600px;
-    height: auto;
-    border-radius: 10px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease;
+}
+
+/* 추가 정보 섹션 */
+.place-additional-info {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #fff9fb;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.place-additional-info h2 {
+    font-size: 22px;
+    color: #ff7fa7;
+    margin-bottom: 20px;
+    font-weight: 600;
+    border-bottom: 2px solid #ffd6e6;
+    padding-bottom: 10px;
+}
+
+.place-additional-info p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+    margin: 12px 0;
+    padding-left: 10px;
+    border-left: 3px solid #ffd6e6;
+}
+
+/* X 버튼 스타일 */
+.place-details-close-button {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #ff7fa7;
+    color: white;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(255, 127, 167, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1001;
+}
+
+.place-details-close-button:hover {
+    background-color: #ff6b98;
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(255, 127, 167, 0.5);
+}
+
+/* 애니메이션 */
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* 스크롤바 스타일링 */
+.place-details-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.place-details-content::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.place-details-content::-webkit-scrollbar-thumb {
+    background: #ffd6e6;
+    border-radius: 4px;
+}
+
+.place-details-content::-webkit-scrollbar-thumb:hover {
+    background: #ff7fa7;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 480px) {
+    .place-details-content {
+        max-height: 100vh;
+        border-radius: 30px;
+    }
+
+    .place-details-header h1 {
+        font-size: 24px;
+    }
+
+    .place-details-image {
+        height: 250px;
+    }
+
+    .place-additional-info h2 {
+        font-size: 20px;
+    }
+
+    .place-additional-info p {
+        font-size: 14px;
+    }
+}
+
+/* 일반 페이지 스타일 */
+.place-details-page {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    box-sizing: border-box; /* 패딩을 너비에 포함 */
+}
+
+.place-details-page .place-details-content {
+    background-color: white;
+    border-radius: 30px;
+    padding: 25px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.place-details-page .place-details-header {
+    text-align: center;
+    margin-bottom: 25px;
+    padding: 15px 0;
+    border-bottom: 2px solid #ffd6e6;
+}
+
+.place-details-page .place-details-header h1 {
+    font-size: 32px;
+    color: #ff7fa7;
+    margin: 0;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.place-details-page .place-details-image {
+    width: 100%;
+    max-width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 20px;
+    margin-bottom: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    box-sizing: border-box;
+}
+
+.place-details-page .place-additional-info {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 25px;
+    background-color: #fff9fb;
+    border-radius: 20px;
+    margin-top: 30px;
+}
+
+.place-details-page .place-additional-info h2 {
+    font-size: 24px;
+    color: #ff7fa7;
+    margin-bottom: 20px;
+    font-weight: 600;
+    border-bottom: 2px solid #ffd6e6;
+    padding-bottom: 10px;
+}
+
+.place-details-page .place-additional-info p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #666;
+    margin: 15px 0;
+    padding-left: 15px;
+    border-left: 3px solid #ffd6e6;
+}
+
+/* 반응형 디자인 - 일반 페이지 */
+@media (max-width: 480px) {
+    .place-details-page {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+
+    .place-details-page .place-details-content {
+        padding: 15px;
+        width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .place-details-page .place-details-header {
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+    }
+
+    .place-details-page .place-details-header h1 {
+        font-size: 24px;
+    }
+
+    .place-details-page .place-details-image {
+        height: 250px;
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    .place-details-page .place-additional-info {
+        width: 100%;
+        margin: 15px 0;
+        border-radius: 0;
+    }
+
+    .place-details-page .place-additional-info h2 {
+        font-size: 20px;
+    }
+
+    .place-details-page .place-additional-info p {
+        font-size: 16px;
+    }
+
+    /* 팝업이 아닌 경우에만 적용되는 스타일 */
+    .place-details-page .place-details-content,
+    .place-details-page .place-details-image,
+    .place-details-page .place-additional-info {
+        border-radius: 0;
+    }
+}
+
+/* 좌우 스크롤 방지 */
+html, body {
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.place-details-page {
+    overflow-x: hidden;
+}
+
+/* 모든 요소에 box-sizing 적용 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 기본 페이지 스타일 */
+.place-details-page {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+    box-sizing: border-box;
+}
+
+.place-details-content {
+    width: 100%;
+    background-color: white;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* 헤더 스타일 */
+.place-details-header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid #ffd6e6;
+}
+
+.place-details-header h1 {
+    font-size: 28px;
+    color: #ff7fa7;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* 이미지 스타일 */
+.place-details-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
     margin-bottom: 20px;
 }
 
 /* 추가 정보 섹션 */
 .place-additional-info {
-    margin-top: 40px;
+    padding: 20px;
+    background-color: #fff9fb;
+    margin-top: 20px;
 }
 
 .place-additional-info h2 {
-    font-size: 20px;
-    margin-bottom: 20px;
+    font-size: 22px;
+    color: #ff7fa7;
+    margin-bottom: 15px;
+    font-weight: 600;
 }
 
-/* X 버튼 스타일 */
-.place-details-close-button {
-    position: fixed; /* 화면 고정 */
-    bottom: 60px; /* 네비게이션 바로 위 */
-    left: 50%; /* 화면의 가운데 정렬 */
-    transform: translateX(-50%); /* 가운데 정렬 보정 */
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #ff7fa7;
-    color: white;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+.place-additional-info p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666;
+    margin: 12px 0;
+    padding-left: 10px;
+    border-left: 3px solid #ffd6e6;
+}
+
+/* 모바일 화면에서의 심플한 디자인 */
+@media (max-width: 480px) {
+    .place-details-page {
+        padding: 0;
+        margin: 0;
+    }
+
+    .place-details-content {
+        padding: 15px;
+    }
+
+    .place-details-header {
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+    }
+
+    .place-details-header h1 {
+        font-size: 24px;
+    }
+
+    .place-details-image {
+        height: 250px;
+        margin: 0 -15px;
+        width: calc(100% + 30px);
+    }
+
+    .place-additional-info {
+        margin: 15px -15px;
+        padding: 15px;
+        background-color: white;
+    }
+
+    .place-additional-info h2 {
+        font-size: 20px;
+        margin-bottom: 10px;
+    }
+
+    .place-additional-info p {
+        font-size: 15px;
+        line-height: 1.5;
+    }
+}
+
+/* 팝업 스타일은 유지 */
+.place-details-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    pointer-events: auto;
+}
+
+.place-details-container .place-details-content {
+    background-color: white;
+    width: 100%;
+    max-width: 440px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border-radius: 30px;
+    padding: 25px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    animation: slideUp 0.3s ease-out;
+    pointer-events: auto;
+}
+
+/* 기본 설정 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body, html {
+    width: 100%;
+    overflow-x: hidden;
 }

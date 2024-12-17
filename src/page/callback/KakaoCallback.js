@@ -15,7 +15,7 @@ function KakaoCallback({setIsLoggedIn}) {
 
         if (code) {
             // 백엔드에 인증 코드 전달하여 JWT 발급
-            axios.post('http://localhost:8090/kakao/callback', { code })
+            axios.post('https://treebomb.mooo.com/kakao/callback', { code })
                 .then(response => {
                     const { token } = response.data;
   
@@ -28,7 +28,7 @@ function KakaoCallback({setIsLoggedIn}) {
                     // 비동기 처리
                     (async () => {
                         try {
-                            const response = await axios.get('http://localhost:8090/api/checkMoreInfoForUuid', {
+                            const response = await axios.get('https://treebomb.mooo.com/api/checkMoreInfoForUuid', {
                                 headers: {
                                     Authorization: `Bearer ${token}`,
                                 },
