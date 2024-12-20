@@ -5,7 +5,7 @@ import "./MenuBar.css"; // CSS 파일을 임포트
 const MenuBar = () => {
     return (
         <nav className="menu-bar">
-            <a href="/category" className="menu-link">
+            <a href="/main/category" className="menu-link">
                 <img src="./images/menubar_img/Category.png" alt="Category" className="menu-icon"/>
             </a>
             <a href="/course" className="menu-link">

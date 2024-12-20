@@ -41,7 +41,7 @@ function MainPage() {
     }, []);
 
     const handleCardClick = (id) => {
-        navigate(`/details/${id}`);
+        navigate(`/main/details/${id}`);
     };
 
     return (

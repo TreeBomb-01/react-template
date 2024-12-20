@@ -7,7 +7,7 @@ const Category = () => {
             <h1>메뉴</h1>
             <ul className="menu-list">
                 <li onClick={() => (window.location.href = "/MyInfo")}>마이페이지</li>
-                <li onClick={() => (window.location.href = "/placelist")}>데이트 스팟 보기</li>
+                <li onClick={() => (window.location.href = "/main/placelist")}>데이트 스팟 보기</li>
                 <li onClick={() => (window.location.href = "/course")}>코스 짜기</li>
                 <li onClick={() => (window.location.href = "/FavoritePlace")}>좋아요한 장소</li>
                 <li onClick={() => (window.location.href = "/MainForm")}>홈</li>

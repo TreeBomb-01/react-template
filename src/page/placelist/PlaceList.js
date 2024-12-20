@@ -65,7 +65,7 @@ const PlaceList = () => {
     };
 
     const handleCardClick = (id) => {
-        navigate(`/placedetails/${id}`);
+        navigate(`/main/placedetails/${id}`);
     };
 
     return (
