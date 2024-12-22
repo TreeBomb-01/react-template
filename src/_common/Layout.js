@@ -7,7 +7,7 @@ const Layout = () => {
     return (
         <div className="layout">
             <div className="header_cosecose">
-                <h1 className="main_title">main</h1>
+                <h1 className="main_title">CoseCose</h1>
             </div>
             {/* 페이지 콘텐츠 */}
             <div className="main-content">

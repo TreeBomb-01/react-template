@@ -5,7 +5,7 @@ import './createcose.css';
 
 const CreateCose = () => {
     const navigate = useNavigate();
-    const [courseName, setCourseName] = useState('');
+    const [coseName, setcoseName] = useState('');
     const [selectedPlaces, setSelectedPlaces] = useState([]);
     const [availablePlaces, setAvailablePlaces] = useState([]);
 
@@ -45,21 +45,28 @@ const CreateCose = () => {
             return;
         }
 
+        // 선택된 장소들의 dateSpotIdx를 확인하기 위한 로그
+        console.log('Selected Places:', selectedPlaces);
+        const placeIds = selectedPlaces.map(place => place.dateSpotIdx);
+        console.log('Place IDs:', placeIds);
+
         try {
             const token = localStorage.getItem('token');
-            await axios.post('https://treebomb.mooo.com/api/create_course', {
-                courseName,
-                places: selectedPlaces.map(place => place.id)
+            const response = await axios.post('https://treebomb.mooo.com/api/create_cose', {
+                coseName: coseName,
+                places: placeIds
             }, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
             });
             
+            console.log('API Response:', response.data);
             alert('코스가 성공적으로 생성되었습니다!');
             navigate('/main');
         } catch (error) {
             console.error('코스 생성 실패:', error);
+            console.error('Error details:', error.response?.data);
             alert('코스 생성에 실패했습니다.');
         }
     };
@@ -72,8 +79,8 @@ const CreateCose = () => {
                 <div className="form-group">
                     <input
                         type="text"
-                        value={courseName}
-                        onChange={(e) => setCourseName(e.target.value)}
+                        value={coseName}
+                        onChange={(e) => setcoseName(e.target.value)}
                         placeholder="코스 이름을 입력하세요"
                         required
                         className="course-name-input"

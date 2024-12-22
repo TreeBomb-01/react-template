@@ -9,6 +9,7 @@ import Category from './page/category/category';
 import PlaceList from './page/placelist/PlaceList';
 import PlaceDetails from './page/placedetails/PlaceDetails';
 import CreateCose from './page/cose/createcose';
+import CoseList from './page/coselist/coselist';
 
 function App() {
     const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
@@ -101,6 +102,7 @@ function App() {
                     </Route>
                     <Route path="category" element={<Category />} />
                     <Route path="createcose" element={<CreateCose />} />
+                    <Route path="coselist" element={<CoseList />} />
                     <Route path="placelist" element={<PlaceList />} />
                     <Route path="placedetails/:id" element={<PlaceDetails />} />
                 </Route>
